@@ -20,8 +20,8 @@
                                 <td>Doctor</td>
                             </tr>
                             <tr>
-                                <td>{{visitData.doctor.title}} {{visitData.doctor.firstName}}
-                                    {{visitData.doctor.lastName}}
+                                <td>{{visitData.specialist.title}} {{visitData.specialist.firstName}}
+                                    {{visitData.specialist.lastName}}
                                 </td>
                             </tr>
                             <tr>

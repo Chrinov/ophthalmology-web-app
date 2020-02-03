@@ -85,7 +85,7 @@
         name: "PatientEdit",
         data() {
             return {
-                doctors: [],
+                specialists: [],
                 isDataLoaded: false,
                 updatedPatient: Object
 

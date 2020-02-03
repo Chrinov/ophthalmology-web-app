@@ -46,10 +46,10 @@
                 <li class="form-row">
 
                     <label><b>Doctor</b></label>
-                    <select id="doctor-select" name="doctor" required v-model="visit.doctor">
-                        <option :key="doctor.id" :value="doctor" v-for="doctor in doctors">
-                            {{doctor.firstName}}
-                            {{doctor.lastName}}
+                    <select id="specialist-select" name="specialist" required v-model="visit.specialist">
+                        <option :key="specialist.id" :value="specialist" v-for="specialist in specialists">
+                            {{specialist.firstName}}
+                            {{specialist.lastName}}
                         </option>
 
                     </select>
@@ -81,7 +81,7 @@
         data() {
             return {
                 errors: [],
-                doctors: [],
+                specialists: [],
                 patients: [],
                 visit: {
                     date: '',
@@ -112,8 +112,8 @@
                     this.errors.push('Please choose a clinic');
                 if (this.visitType == null)
                     this.errors.push('Please choose visit type');
-                if (this.doctor == null)
-                    this.errors.push('Please choose a doctor');
+                if (this.specialist == null)
+                    this.errors.push('Please choose a specialist');
                 if (this.reason == null)
                     this.errors.push('Please state a reason.');
 
@@ -156,10 +156,10 @@
             async getDoctors() {
                 try {
                     const response = await fetch(
-                        "http://localhost:5000/api/doctors"
+                        "http://localhost:5000/api/specialists"
                     );
                     const data = await response.json();
-                    this.doctors = data;
+                    this.specialists = data;
 
                 } catch (error) {
                     console.error(error);

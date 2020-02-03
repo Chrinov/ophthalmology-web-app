@@ -1,6 +1,8 @@
 package com.opticus.opticusapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.opticus.opticusapp.entity.user.Patient;
+import com.opticus.opticusapp.entity.user.Specialist;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,7 +15,7 @@ public class Visit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "visit_id")
     private int id;
 
     @Column(name = "date")
@@ -42,7 +44,7 @@ public class Visit {
     //  @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    private Specialist specialist;
 
     //  @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     // @JsonIdentityReference(alwaysAsId = true)
@@ -54,7 +56,7 @@ public class Visit {
     public Visit() {
     }
 
-    public Visit(LocalDateTime date, String description, String visitType, String reason, boolean isPlanned, String clinic, Patient patient, Doctor doctor) {
+    public Visit(LocalDateTime date, String description, String visitType, String reason, boolean isPlanned, String clinic, Patient patient, Specialist specialist) {
         this.date = date;
         this.description = description;
         this.visitType = visitType;
@@ -62,7 +64,7 @@ public class Visit {
         this.isPlanned = isPlanned;
         this.clinic = clinic;
         this.patient = patient;
-        this.doctor = doctor;
+        this.specialist = specialist;
     }
 
     /**
@@ -189,12 +191,12 @@ public class Visit {
         isPlanned = planned;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public Specialist getSpecialist() {
+        return specialist;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setSpecialist(Specialist specialist) {
+        this.specialist = specialist;
     }
 
     public Patient getPatient() {

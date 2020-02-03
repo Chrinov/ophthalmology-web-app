@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5000", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class VisitController {
@@ -15,13 +16,13 @@ public class VisitController {
     @Autowired
     private VisitService visitService;
 
-    @CrossOrigin
+    
     @GetMapping("/visits")
     public List<Visit> getVisits() {
         return visitService.getVisits();
     }
 
-    @CrossOrigin
+    
     @GetMapping("/visits/{visitId}")
     public Visit getVisit(@PathVariable int visitId) {
 
@@ -32,7 +33,7 @@ public class VisitController {
 
     }
 
-    @CrossOrigin
+    
     @PutMapping("/visits")
     public Visit saveVisit(@RequestBody Visit visit) {
         visitService.saveVisit(visit);
@@ -41,7 +42,7 @@ public class VisitController {
     }
 
 
-    @CrossOrigin
+    
     @PostMapping("/visits")
     public Visit addVisit(@RequestBody Visit visit) {
         visit.setId(0);
@@ -50,7 +51,7 @@ public class VisitController {
         return visit;
     }
 
-    @CrossOrigin
+    
     @DeleteMapping("/visits/{visitId}")
     public String deleteNote(@PathVariable int visitId) {
         Visit visit = visitService.getVisit(visitId);

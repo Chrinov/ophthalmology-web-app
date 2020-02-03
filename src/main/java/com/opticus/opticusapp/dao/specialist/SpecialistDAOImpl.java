@@ -1,6 +1,6 @@
-package com.opticus.opticusapp.dao;
+package com.opticus.opticusapp.dao.specialist;
 
-import com.opticus.opticusapp.entity.Doctor;
+import com.opticus.opticusapp.entity.user.Specialist;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,53 +10,53 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
-public class DoctorDAOImpl implements DoctorDAO {
+public class SpecialistDAOImpl implements SpecialistDAO {
 
 
     private EntityManager entityManager;
 
 
     @Autowired
-    public DoctorDAOImpl(EntityManager entityManager) {
+    public SpecialistDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
 
     @Override
-    public List<Doctor> getDoctors() {
+    public List<Specialist> getDoctors() {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Doctor> theQuery = currentSession.createQuery("from Doctor order by lastName", Doctor.class);
+        Query<Specialist> theQuery = currentSession.createQuery("from Doctor order by lastName", Specialist.class);
 
-        List<Doctor> doctors = theQuery.getResultList();
+        List<Specialist> specialists = theQuery.getResultList();
 
-        return doctors;
+        return specialists;
     }
 
 
     @Override
-    public void saveDoctor(Doctor doctor) {
+    public void saveDoctor(Specialist specialist) {
 
         Session currentSession = entityManager.unwrap(Session.class);
 
-        currentSession.saveOrUpdate(doctor);
+        currentSession.saveOrUpdate(specialist);
 
     }
 
     @Override
-    public Doctor getDoctor(int id) {
+    public Specialist getDoctor(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Doctor doctor = currentSession.get(Doctor.class, id);
+        Specialist specialist = currentSession.get(Specialist.class, id);
 
-        return doctor;
+        return specialist;
     }
 
     @Override
     public void deleteDoctor(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Doctor doctor = currentSession.get(Doctor.class, id);
+        Specialist specialist = currentSession.get(Specialist.class, id);
 
         Query theQuery = currentSession.createQuery("delete from Doctor where id=:doctorId");
         theQuery.setParameter("doctorId", id);

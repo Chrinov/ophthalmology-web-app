@@ -1,7 +1,7 @@
 package com.opticus.opticusapp.service;
 
-import com.opticus.opticusapp.dao.DoctorDAO;
-import com.opticus.opticusapp.entity.Doctor;
+import com.opticus.opticusapp.dao.specialist.SpecialistDAO;
+import com.opticus.opticusapp.entity.user.Specialist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,29 +14,29 @@ public class DoctorServiceImpl implements DoctorService {
 
     //inject doctor DAO
     @Autowired
-    private DoctorDAO doctorDAO;
+    private SpecialistDAO specialistDAO;
 
     @Override
     @Transactional
-    public List<Doctor> getDoctors() {
-        return doctorDAO.getDoctors();
+    public List<Specialist> getDoctors() {
+        return specialistDAO.getDoctors();
     }
 
     @Override
     @Transactional
-    public void saveDoctor(Doctor doctor) {
-        doctorDAO.saveDoctor(doctor);
+    public void saveDoctor(Specialist specialist) {
+        specialistDAO.saveDoctor(specialist);
     }
 
     @Override
     @Transactional
-    public Doctor getDoctor(int id) {
-        return doctorDAO.getDoctor(id);
+    public Specialist getDoctor(int id) {
+        return specialistDAO.getDoctor(id);
     }
 
     @Override
     @Transactional
     public void deleteDoctor(int id) {
-        doctorDAO.deleteDoctor(id);
+        specialistDAO.deleteDoctor(id);
     }
 }

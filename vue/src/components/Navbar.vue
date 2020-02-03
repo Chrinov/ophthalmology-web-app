@@ -11,7 +11,7 @@
                 <li><a href="#">About</a></li>
                 <li><a href="#">Clinics</a></li>
                 <li>
-                    <router-link to="/doctors">Doctors</router-link>
+                    <router-link to="/specialists">Doctors</router-link>
                 </li>
                 <li><a href="#">Price list</a></li>
                 <li>

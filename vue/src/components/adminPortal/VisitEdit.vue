@@ -22,13 +22,13 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <!--                                    {{updatedVisit.doctor.title}} {{updatedVisit.doctor.firstName}} {{updatedVisit.doctor.lastName}}-->
+                                    <!--                                    {{updatedVisit.specialist.title}} {{updatedVisit.specialist.firstName}} {{updatedVisit.specialist.lastName}}-->
                                     <!--                                <br>-->
-                                    <select id="doctor-select" name="doctor" v-model="updatedVisit.doctor">
+                                    <select id="specialist-select" name="specialist" v-model="updatedVisit.specialist">
                                         <option value="">Choose...</option>
-                                        <option :key="doctor.id" :value="doctor" v-for="doctor in doctors">
-                                            {{doctor.firstName}}
-                                            {{doctor.lastName}}
+                                        <option :key="specialist.id" :value="specialist" v-for="specialist in specialists">
+                                            {{specialist.firstName}}
+                                            {{specialist.lastName}}
                                         </option>
 
                                     </select>
@@ -113,7 +113,7 @@
         name: "VisitEdit",
         data() {
             return {
-                doctors: [],
+                specialists: [],
                 isDataLoaded: false,
                 updatedVisit: Object,
                 addresses: ['Warszawa, Puławska 427', 'Gdynia, Morska 15'],
@@ -138,10 +138,10 @@
             async getDoctors() {
                 try {
                     const response = await fetch(
-                        "http://localhost:5000/api/doctors"
+                        "http://localhost:5000/api/specialists"
                     );
                     const data = await response.json();
-                    this.doctors = data;
+                    this.specialists = data;
 
                 } catch (error) {
                     console.error(error);

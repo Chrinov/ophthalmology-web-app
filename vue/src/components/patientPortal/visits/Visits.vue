@@ -13,7 +13,7 @@
 
                     <div class="visit-info">
                         <label class="specialist">
-                            {{visit.doctor.title}} {{visit.doctor.firstName}} {{visit.doctor.lastName}}
+                            {{visit.specialist.title}} {{visit.specialist.firstName}} {{visit.specialist.lastName}}
                         </label>
                         <br>
                         <label class="address">

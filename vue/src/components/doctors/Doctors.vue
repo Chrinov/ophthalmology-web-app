@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="wrapper">
-            <h1>Find your doctor</h1>
+            <h1>Find your specialist</h1>
             <div class="search-toolbar">
-                <select id="doctor-select" v-model="selectedSpecialisation">
+                <select id="specialist-select" v-model="selectedSpecialisation">
                     <option value="">Specialisation</option>
                     <option value="cornea-and-external-disease">Cornea and External Disease</option>
                     <option value="ophthalmic-pathology">Ophthalmic Pathology</option>
@@ -18,22 +18,22 @@
                 <button>Search</button>
             </div>
 
-            <div class="doctors-list" v-if="isFiltered">
+            <div class="specialists-list" v-if="isFiltered">
 
-                <div :key="doctor.id" v-for="doctor in doctors">
+                <div :key="specialist.id" v-for="specialist in specialists">
 
 
-                    <div class="doctor-detail">
+                    <div class="specialist-detail">
 
                         <div class="header">
-                            <h1> {{doctor.firstName}} {{doctor.lastName}}</h1>
-                            <h2>{{doctor.specialisation}}</h2>
-                            <h4>Rating: {{doctor.rating}}</h4>
+                            <h1> {{specialist.firstName}} {{specialist.lastName}}</h1>
+                            <h2>{{specialist.specialisation}}</h2>
+                            <h4>Rating: {{specialist.rating}}</h4>
 
                         </div>
 
 
-                        <h4>{{doctor.description}}</h4>
+                        <h4>{{specialist.description}}</h4>
 
                         <button>Make an appointment</button>
 
@@ -54,7 +54,7 @@
         name: "Doctors",
         data() {
             return {
-                doctors: [],
+                specialists: [],
                 selectedSpecialisation: '',
                 selectedClinic: '',
                 isFiltered: false
@@ -69,7 +69,7 @@
             matchingDoctors() {
 
                 this.isFiltered = true;
-                return this.doctors.filter(doc => doc.specialisation === this.selectedSpecialisation);
+                return this.specialists.filter(doc => doc.specialisation === this.selectedSpecialisation);
 
             }
             ,
@@ -77,10 +77,10 @@
             async getDoctors() {
                 try {
                     const response = await fetch(
-                        "http://localhost:5000/api/doctors"
+                        "http://localhost:5000/api/specialists"
                     );
                     const data = await response.json();
-                    this.doctors = data;
+                    this.specialists = data;
                     this.isFiltered = true;
 
                 } catch (error) {
@@ -116,7 +116,7 @@
         align-self: center;
     }
 
-    .doctor-detail {
+    .specialist-detail {
         border: 2px solid black;
     }
 

@@ -129,7 +129,7 @@
         name: "DoctorEdit",
         data() {
             return {
-                doctors: [],
+                specialists: [],
                 isDataLoaded: false,
                 updatedDoctor: Object
 
@@ -148,20 +148,20 @@
 
                 console.log(this.updatedDoctor.phoneNumber);
                 try {
-                    await fetch(`http://localhost:5000/api/doctors/${id}`, {
+                    await fetch(`http://localhost:5000/api/specialists/${id}`, {
                         method: 'PUT',
                         body: JSON.stringify(this.updatedDoctor),
                         headers: {'Content-type': 'application/json; charset=UTF-8'},
                     });
 
-                    alert('successfully edited doctor');
+                    alert('successfully edited specialist');
                 } catch (error) {
                     console.error(error)
                 }
             },
             async deleteDoctor(id) {
                 try {
-                    await fetch(`http://localhost:5000/api/doctors/${id}`, {
+                    await fetch(`http://localhost:5000/api/specialists/${id}`, {
                         method: "DELETE"
                     });
 

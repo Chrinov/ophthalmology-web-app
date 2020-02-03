@@ -33,7 +33,7 @@
                     <td>{{visit.date}}</td>
                     <td>{{visit.patient.email}}</td>
                     <td>{{visit.patient.lastName}}</td>
-                    <td>{{visit.doctor.lastName}}</td>
+                    <td>{{visit.specialist.lastName}}</td>
                     <td>{{visit.clinic}}</td>
 
                     <td>

@@ -27,16 +27,16 @@
                 </tr>
 
 
-                <tr :key="doctor.id" v-for="doctor in this.doctors">
+                <tr :key="specialist.id" v-for="specialist in this.specialists">
 
-                    <td>{{doctor.pesel}}</td>
-                    <td>{{doctor.email}}</td>
-                    <td>{{doctor.firstName}}</td>
-                    <td>{{doctor.lastName}}</td>
-                    <td>{{doctor.specialisation}}</td>
+                    <td>{{specialist.pesel}}</td>
+                    <td>{{specialist.email}}</td>
+                    <td>{{specialist.firstName}}</td>
+                    <td>{{specialist.lastName}}</td>
+                    <td>{{specialist.specialisation}}</td>
 
                     <td>
-                        <button @click="prepareDoctorDetail(doctor)">Show details</button>
+                        <button @click="prepareDoctorDetail(specialist)">Show details</button>
                     </td>
 
                 </tr>
@@ -64,7 +64,7 @@
             return {
                 isDoctorDetail: false,
                 isNewDoctor: false,
-                doctors: [],
+                specialists: [],
                 currentDoctor: null,
                 isDataLoaded: false
 
@@ -82,10 +82,10 @@
             async getDoctors() {
                 try {
                     const response = await fetch(
-                        "http://localhost:5000/api/doctors"
+                        "http://localhost:5000/api/specialists"
                     );
                     const data = await response.json();
-                    this.doctors = data;
+                    this.specialists = data;
                     this.isDataLoaded = true;
                 } catch (error) {
                     // eslint-disable-next-line no-console
@@ -94,8 +94,8 @@
                 // eslint-disable-next-line no-console
             }
             ,
-            prepareDoctorDetail(doctor) {
-                this.currentDoctor = doctor;
+            prepareDoctorDetail(specialist) {
+                this.currentDoctor = specialist;
                 this.isDoctorDetail = true;
 
             }
