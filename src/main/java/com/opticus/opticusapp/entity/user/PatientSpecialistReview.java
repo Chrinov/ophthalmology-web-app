@@ -31,6 +31,15 @@ public class PatientSpecialistReview {
     @Column(name = "comment")
     private String comment;
 
+
+    public void deletePatientSpecialistReview() {
+        patient.removePatientSpecialistReview(this);
+        specialist.removePatientSpecialistReview(this);
+        patient = null;
+        specialist = null;
+    }
+
+
     public int getId() {
         return id;
     }

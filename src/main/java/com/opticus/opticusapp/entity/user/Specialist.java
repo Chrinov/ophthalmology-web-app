@@ -1,13 +1,11 @@
 package com.opticus.opticusapp.entity.user;
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.opticus.opticusapp.entity.Visit;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +13,6 @@ import java.util.List;
 @Table(name = "doctor")
 public class Specialist extends User {
 
-
-    //TODO create Specialisation <name> ENTITY 1-(1..*)
-    @Column(name = "specialisation")
-    private String specialisation;
 
     @Column(name = "hire_date")
     private LocalDateTime hireDate;
@@ -34,12 +28,23 @@ public class Specialist extends User {
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
 
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "user_id")
-    @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(mappedBy = "doctor", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Visit> visits;
 
     public Specialist() {
+    }
+
+
+    public double getSpecialistRating() {
+
+        return patientSpecialistReviews.stream().mapToDouble(review -> review.getRating()).sum() / patientSpecialistReviews.size();
+
+    }
+
+    public LocalDateTime getSeniority() {
+        LocalDateTime seniority = LocalDateTime.now().minus(hireDate.getYear(), ChronoUnit.YEARS);
+
+        return seniority;
     }
 
 

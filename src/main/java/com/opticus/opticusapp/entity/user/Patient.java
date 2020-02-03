@@ -33,9 +33,6 @@ public class Patient extends User {
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
 
 
-
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "user_id")
-    @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Visit> visits;
 

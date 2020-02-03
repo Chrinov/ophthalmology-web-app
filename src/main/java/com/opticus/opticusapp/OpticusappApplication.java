@@ -8,6 +8,8 @@ public class OpticusappApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(OpticusappApplication.class, args);
+
+
     }
 
 }
