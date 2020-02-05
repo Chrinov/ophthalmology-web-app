@@ -1,6 +1,6 @@
 package com.opticus.opticusapp.controller;
 
-import com.opticus.opticusapp.entity.user.Patient;
+import com.opticus.opticusapp.entity.Patient;
 import com.opticus.opticusapp.helpers.PatientNotFoundException;
 import com.opticus.opticusapp.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;

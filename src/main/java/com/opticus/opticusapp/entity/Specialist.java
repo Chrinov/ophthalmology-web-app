@@ -1,7 +1,5 @@
-package com.opticus.opticusapp.entity.user;
+package com.opticus.opticusapp.entity;
 
-
-import com.opticus.opticusapp.entity.Visit;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "doctor")
+@Table(name = "specialist")
 public class Specialist extends User {
 
 
@@ -24,12 +22,9 @@ public class Specialist extends User {
     private String title;
 
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL)
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
 
-
-    @OneToMany(mappedBy = "doctor", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-    private List<Visit> visits;
 
     public Specialist() {
     }

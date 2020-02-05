@@ -1,4 +1,4 @@
-package com.opticus.opticusapp.entity.user;
+package com.opticus.opticusapp.entity;
 
 import org.hibernate.validator.constraints.Range;
 

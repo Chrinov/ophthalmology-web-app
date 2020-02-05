@@ -1,7 +1,7 @@
 package com.opticus.opticusapp.service;
 
 import com.opticus.opticusapp.dao.patient.PatientDAO;
-import com.opticus.opticusapp.entity.user.Patient;
+import com.opticus.opticusapp.entity.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

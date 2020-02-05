@@ -1,6 +1,6 @@
 package com.opticus.opticusapp.dao.specialist;
 
-import com.opticus.opticusapp.entity.user.Specialist;
+import com.opticus.opticusapp.entity.Specialist;
 
 import java.util.List;
 

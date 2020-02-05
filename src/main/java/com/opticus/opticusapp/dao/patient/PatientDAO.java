@@ -1,6 +1,6 @@
 package com.opticus.opticusapp.dao.patient;
 
-import com.opticus.opticusapp.entity.user.Patient;
+import com.opticus.opticusapp.entity.Patient;
 
 import java.util.List;
 

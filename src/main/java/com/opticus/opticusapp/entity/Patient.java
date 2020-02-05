@@ -1,9 +1,4 @@
-package com.opticus.opticusapp.entity.user;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.opticus.opticusapp.entity.Visit;
+package com.opticus.opticusapp.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -34,7 +29,9 @@ public class Patient extends User {
 
 
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-    private List<Visit> visits;
+    private List<VisitAppointment> visitAppointments = new ArrayList<>();
+
+
 
     public Patient() {
     }
@@ -45,6 +42,22 @@ public class Patient extends User {
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.gender = gender;
+    }
+
+    public List<VisitAppointment> getvisitAppointment() {
+        return visitAppointments;
+    }
+
+    public void addVisitAppointment(VisitAppointment visitAppointment) {
+        visitAppointments.add(visitAppointment);
+        visitAppointment.setPatient(this);
+
+    }
+
+    public void removeVisitAppointment(VisitAppointment visitAppointment) {
+        visitAppointment.setPatient(null);
+        this.visitAppointments.remove(visitAppointment);
+
     }
 
 
@@ -63,15 +76,6 @@ public class Patient extends User {
         this.patientSpecialistReviews.remove(patientSpecialistReview);
 
     }
-
-    public List<Visit> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(List<Visit> visits) {
-        this.visits = visits;
-    }
-
 
     public LocalDateTime getRegisterDate() {
         return registerDate;
