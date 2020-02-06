@@ -1,7 +1,7 @@
 package com.opticus.opticusapp.service;
 
 import com.opticus.opticusapp.dao.visit.VisitDAO;
-import com.opticus.opticusapp.entity.Visit;
+import com.opticus.opticusapp.entity.visit.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

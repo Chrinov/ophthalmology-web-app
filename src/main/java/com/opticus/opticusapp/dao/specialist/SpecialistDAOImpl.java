@@ -1,6 +1,6 @@
 package com.opticus.opticusapp.dao.specialist;
 
-import com.opticus.opticusapp.entity.Specialist;
+import com.opticus.opticusapp.entity.user.Specialist;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

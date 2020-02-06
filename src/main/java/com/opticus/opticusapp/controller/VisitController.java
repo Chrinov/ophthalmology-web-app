@@ -1,6 +1,6 @@
 package com.opticus.opticusapp.controller;
 
-import com.opticus.opticusapp.entity.Visit;
+import com.opticus.opticusapp.entity.visit.Visit;
 import com.opticus.opticusapp.helpers.VisitNotFoundException;
 import com.opticus.opticusapp.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;

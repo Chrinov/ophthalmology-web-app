@@ -1,7 +1,7 @@
 package com.opticus.opticusapp.dao.visit;
 
 
-import com.opticus.opticusapp.entity.Visit;
+import com.opticus.opticusapp.entity.visit.Visit;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

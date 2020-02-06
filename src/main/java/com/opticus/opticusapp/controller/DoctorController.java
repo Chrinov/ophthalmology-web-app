@@ -1,7 +1,7 @@
 package com.opticus.opticusapp.controller;
 
 
-import com.opticus.opticusapp.entity.Specialist;
+import com.opticus.opticusapp.entity.user.Specialist;
 import com.opticus.opticusapp.helpers.DoctorNotFoundException;
 import com.opticus.opticusapp.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,13 +61,13 @@ public class DoctorController {
 
         doctorService.deleteDoctor(doctorId);
 
-        return "Deleted Specialist with Id: " + doctorId;
+        return "Deleted specialist with Id: " + doctorId;
     }
 
 
     private void checkIfDoctorExists(Specialist specialist) {
         if (specialist == null)
-            throw new DoctorNotFoundException("Specialist not found!");
+            throw new DoctorNotFoundException("specialist not found!");
     }
 
 }

@@ -1,6 +1,6 @@
 package com.opticus.opticusapp.dao.specialist;
 
-import com.opticus.opticusapp.entity.Specialist;
+import com.opticus.opticusapp.entity.user.Specialist;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface SpecialistDAO {
 
     void saveDoctor(Specialist specialist);
 
-    //void updateDoctor(Specialist doctor);
+    //void updateDoctor(specialist doctor);
 
     Specialist getDoctor(int id);
 

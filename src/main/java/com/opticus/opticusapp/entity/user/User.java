@@ -1,4 +1,4 @@
-package com.opticus.opticusapp.entity;
+package com.opticus.opticusapp.entity.user;
 
 
 import javax.persistence.*;
@@ -26,6 +26,9 @@ public class User {
     @Column(name = "signUpConfirmed")
     private boolean signUpConfirmed;
 
+    @Column(name = "password")
+    private String password;
+
     public User() {
     }
 
@@ -34,6 +37,8 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.signUpConfirmed = signUpConfirmed;
+        this.password = password;
+
     }
 
     /**
@@ -115,4 +120,13 @@ public class User {
     public void setSignUpConfirmed(boolean signUpConfirmed) {
         this.signUpConfirmed = signUpConfirmed;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

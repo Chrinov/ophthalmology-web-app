@@ -1,6 +1,6 @@
 package com.opticus.opticusapp.service;
 
-import com.opticus.opticusapp.entity.Visit;
+import com.opticus.opticusapp.entity.visit.Visit;
 
 import java.util.List;
 

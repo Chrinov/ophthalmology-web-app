@@ -1,4 +1,8 @@
-package com.opticus.opticusapp.entity;
+package com.opticus.opticusapp.entity.user;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.opticus.opticusapp.entity.review.PatientSpecialistReview;
+import com.opticus.opticusapp.entity.visit.VisitAppointment;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,10 +28,11 @@ public class Patient extends User {
     @Column(name = "gender")
     private String gender;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
 
-
+    @JsonBackReference
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<VisitAppointment> visitAppointments = new ArrayList<>();
 

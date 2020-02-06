@@ -1,7 +1,9 @@
-package com.opticus.opticusapp.entity;
+package com.opticus.opticusapp.entity.review;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.opticus.opticusapp.entity.user.Patient;
 import org.hibernate.validator.constraints.Range;
-
+import com.opticus.opticusapp.entity.user.Specialist;
 import javax.persistence.*;
 
 @Entity
@@ -14,13 +16,12 @@ public class PatientSpecialistReview {
     @Column(name = "patient_specialist_review_id")
     private int id;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
     private Patient patient;
 
-
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
     private Specialist specialist;
 
     @Column(name = "rating", precision = 1)
@@ -31,6 +32,16 @@ public class PatientSpecialistReview {
     @Column(name = "comment")
     private String comment;
 
+    public PatientSpecialistReview(Patient patient, Specialist specialist, @Range(min = 0, max = 5) double rating, String comment) {
+        this.patient = patient;
+        this.specialist = specialist;
+        this.rating = rating;
+        this.comment = comment;
+    }
+
+    public PatientSpecialistReview() {
+
+    }
 
     public void deletePatientSpecialistReview() {
         patient.removePatientSpecialistReview(this);
@@ -54,6 +65,7 @@ public class PatientSpecialistReview {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+        this.patient.addPatientSpecialistReview(this);
     }
 
     public Specialist getSpecialist() {
@@ -62,6 +74,7 @@ public class PatientSpecialistReview {
 
     public void setSpecialist(Specialist specialist) {
         this.specialist = specialist;
+        this.specialist.addPatientSpecialistReview(this);
     }
 
     public double getRating() {
