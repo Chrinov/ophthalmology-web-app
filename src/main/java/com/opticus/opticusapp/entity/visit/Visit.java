@@ -37,9 +37,17 @@ public class Visit {
     @Column(name = "description")
     private String description;
 
+
+    @Column(name = "price")
+    private double price;
+
+    @Column(name = "total_price")
+    private double totalPrice;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private VisitStatus status;
+
 
     //TODO Clinic
 
@@ -60,6 +68,10 @@ public class Visit {
     private List<AdministeredMedicine> administeredMedicines = new ArrayList<>();
 
 
+    @PostLoad
+    private void postLoad() {
+        this.totalPrice = getExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
+    }
 
     public Visit() {
     }
