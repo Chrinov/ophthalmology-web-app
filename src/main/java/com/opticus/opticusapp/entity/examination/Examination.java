@@ -48,5 +48,6 @@ public class Examination {
 
     public void setVisit(Visit visit) {
         this.visit = visit;
+        this.visit.setTotalPrice(this.visit.getPrice() + this.visit.getTotalPrice() + this.price);
     }
 }

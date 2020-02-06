@@ -1,7 +1,6 @@
 package com.opticus.opticusapp.entity.visit;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.opticus.opticusapp.entity.examination.Examination;
 import com.opticus.opticusapp.entity.medicine.AdministeredMedicine;
 import com.opticus.opticusapp.entity.user.Specialist;
@@ -14,16 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-enum VisitStatus{
+enum VisitStatus {
     PLANNED, COMPLETED, CANCELLED
 }
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Visit {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+abstract public class Visit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "visit_id")
     private int id;
 
@@ -40,6 +39,7 @@ public class Visit {
 
     @Column(name = "price")
     private double price;
+
 
     @Column(name = "total_price")
     private double totalPrice;
@@ -68,15 +68,17 @@ public class Visit {
     private List<AdministeredMedicine> administeredMedicines = new ArrayList<>();
 
 
-    @PostLoad
-    private void postLoad() {
-        this.totalPrice = getExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
-    }
-
     public Visit() {
     }
 
+//    @PostUpdate
+//    private void postLoad() {
+//        this.totalPrice = this.price + getExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
+//    }
 
+    public double totalPrice() {
+        return this.totalPrice = this.price + getExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
+    }
 
     public List<AdministeredMedicine> administeredMedicine() {
         return administeredMedicines;
@@ -108,6 +110,22 @@ public class Visit {
         visitAppointment.setVisit(null);
         this.visitAppointments.remove(visitAppointment);
 
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public List<Examination> getExaminations() {
