@@ -28,7 +28,13 @@ public class Specialist extends User {
     @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL)
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
 
-
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+        name= "specialist_clinic",
+        joinColumns = { @JoinColumn(name = "user_id")},
+        inverseJoinColumns = { @JoinColumn(name = "clinic_id")}
+    )
+    Set<Clinic> clinics = new HashSet<>();
     public Specialist() {
     }
 
