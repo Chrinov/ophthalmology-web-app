@@ -1,19 +1,21 @@
 package com.opticus.opticusapp.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.opticus.opticusapp.entity.clinic.Clinic;
 import com.opticus.opticusapp.entity.review.PatientSpecialistReview;
-import com.opticus.opticusapp.entity.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "specialist")
 public class Specialist extends User {
 
+
+    @ElementCollection
+    private Set<SpecialistType> specialistTypes;
 
     @Column(name = "hire_date")
     private LocalDateTime hireDate;
@@ -23,6 +25,7 @@ public class Specialist extends User {
 
     @Column(name = "title")
     private String title;
+
 
     @JsonBackReference
     @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL)
@@ -35,10 +38,49 @@ public class Specialist extends User {
         inverseJoinColumns = { @JoinColumn(name = "clinic_id")}
     )
     Set<Clinic> clinics = new HashSet<>();
+
+
+
+
     public Specialist() {
     }
 
 
+    public Specialist(String firstName, String lastName, LocalDateTime birthdate, String email, boolean signUpConfirmed, LocalDateTime hireDate, String description, String title) {
+        super(firstName, lastName, birthdate, email, signUpConfirmed);
+        this.hireDate = hireDate;
+        this.description = description;
+        this.title = title;
+    }
+
+    public void addSpecialistType(SpecialistType specialistType) {
+        this.specialistTypes.add(specialistType);
+
+    }
+
+    public void removeSpecialistType(SpecialistType specialistType) {
+        this.specialistTypes.remove(specialistType);
+    }
+
+    public Set<SpecialistType> getSpecialistTypes() {
+        return specialistTypes;
+    }
+
+    public void setSpecialistTypes(Set<SpecialistType> specialistTypes) {
+        this.specialistTypes = specialistTypes;
+    }
+
+    public void addClinic(Clinic clinic) {
+        clinics.add(clinic);
+        clinic.addSpecialist(this);
+
+    }
+
+    public void removeClinic(Clinic clinic) {
+        clinics.remove(clinic);
+        this.clinics.remove(clinic);
+
+    }
     public double getSpecialistRating() {
 
         return patientSpecialistReviews.stream().mapToDouble(review -> review.getRating()).sum() / patientSpecialistReviews.size();
@@ -68,5 +110,39 @@ public class Specialist extends User {
 
     }
 
+    public LocalDateTime getHireDate() {
+        return hireDate;
+    }
 
+    public void setHireDate(LocalDateTime hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPatientSpecialistReviews(List<PatientSpecialistReview> patientSpecialistReviews) {
+        this.patientSpecialistReviews = patientSpecialistReviews;
+    }
+
+    public Set<Clinic> getClinics() {
+        return clinics;
+    }
+
+    public void setClinics(Set<Clinic> clinics) {
+        this.clinics = clinics;
+    }
 }
