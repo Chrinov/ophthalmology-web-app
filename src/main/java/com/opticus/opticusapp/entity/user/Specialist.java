@@ -41,7 +41,7 @@ public class Specialist extends User {
     @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL)
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
 
-    @JsonManagedReference("specialist-visit")
+   // @JsonManagedReference("specialist-visit")
     @OneToMany(mappedBy = "specialist", cascade = {CascadeType.ALL})
     private List<Visit> visits = new ArrayList<>();
 

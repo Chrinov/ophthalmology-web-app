@@ -59,11 +59,15 @@ public class Visit {
 
 
 
-    @JsonBackReference("patient-visit")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+  //  @JsonBackReference("patient-visit")
     @ManyToOne(cascade = {CascadeType.ALL})
     private Patient patient;
 
-    @JsonBackReference("specialist-visit")
+   // @JsonBackReference("specialist-visit")
+   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+   @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(cascade = {CascadeType.ALL})
     private Specialist specialist;
 

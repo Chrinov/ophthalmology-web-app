@@ -1,7 +1,9 @@
 package com.opticus.opticusapp.controller;
 
+import com.opticus.opticusapp.entity.user.Patient;
 import com.opticus.opticusapp.entity.visit.Visit;
 import com.opticus.opticusapp.helpers.VisitNotFoundException;
+import com.opticus.opticusapp.service.PatientService;
 import com.opticus.opticusapp.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,6 +19,8 @@ public class VisitController {
     @Autowired
     private VisitService visitService;
 
+    @Autowired
+    private PatientService patientService;
     
     @GetMapping("/visits")
     public List<Visit> getVisits() {
@@ -46,7 +50,11 @@ public class VisitController {
     @PostMapping("/visits")
     public Visit addVisit(@RequestBody Visit visit) {
         visit.setId(0);
-        System.out.println(visit);
+
+        Patient patient = patientService.getPatient(visit.getPatient().getId());
+        visit.setPatient(patient);
+        visit.setSpecialist(null);
+
         visitService.saveVisit(visit);
 
         return visit;

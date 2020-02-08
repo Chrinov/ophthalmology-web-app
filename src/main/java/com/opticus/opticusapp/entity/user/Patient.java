@@ -33,7 +33,7 @@ public class Patient extends User {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
 
-    @JsonManagedReference("patient-visit")
+   // @JsonManagedReference("patient-visit")
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Visit> visits = new ArrayList<>();
 
