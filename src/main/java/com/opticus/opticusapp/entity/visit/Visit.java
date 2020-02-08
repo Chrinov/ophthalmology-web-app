@@ -1,7 +1,6 @@
 package com.opticus.opticusapp.entity.visit;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.opticus.opticusapp.entity.examination.MedicalExam;
 import com.opticus.opticusapp.entity.medicine.AdministeredMedicine;
 import com.opticus.opticusapp.entity.user.Patient;
@@ -24,7 +23,6 @@ enum VisitType{
 }
 
 @Entity
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Visit {
 
     @Id
@@ -61,17 +59,18 @@ public class Visit {
 
 
     @JsonManagedReference
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Patient patient;
 
     @JsonManagedReference
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Specialist specialist;
 
   //  @JsonBackReference
 //    @OneToMany(mappedBy = "visit", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
 //    private List<Examination> examinations = new ArrayList<>();
 
+  //  @JsonBackReference
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "medical_examinations", joinColumns = @JoinColumn(name = "visit_id"))
     @AttributeOverrides({
@@ -82,20 +81,12 @@ public class Visit {
 
 
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "visit", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+ //   @JsonBackReference
+ //   @JsonIgnore
+    @JsonManagedReference
+    @OneToMany(mappedBy = "visit", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<AdministeredMedicine> administeredMedicines = new ArrayList<>();
 
-
-    public Visit(LocalDateTime date, LocalTime time, String description, double price, VisitStatus status, VisitType visitType, Specialist specialist) {
-        this.date = date;
-        this.time = time;
-        this.description = description;
-        this.price = price;
-        this.status = status;
-        this.visitType = visitType;
-        this.specialist = specialist;
-    }
 
     public Visit() {
     }
@@ -154,11 +145,11 @@ public class Visit {
 //    }
 
 
-//    public VisitAppointment getVisitAppointments() {
+//    public VisitAppointment getVisits() {
 //        return visitAppointments;
 //    }
 //
-//    public void setVisitAppointments(VisitAppointment visitAppointments) {
+//    public void setVisits(VisitAppointment visitAppointments) {
 //        this.visitAppointments = visitAppointments;
 //    }
 

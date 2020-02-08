@@ -53,7 +53,7 @@
 //    patient.removeVisitAppointment(this);
 //    patient = null;
 //
-//    visit.setVisitAppointments(null);
+//    visit.setVisits(null);
 //    visit = null;
 //}
 //
@@ -88,7 +88,7 @@
 //
 //    public void setVisit(Visit visit) {
 //        this.visit = visit;
-//        this.visit.setVisitAppointments(this);
+//        this.visit.setVisits(this);
 //
 //    }
 //}

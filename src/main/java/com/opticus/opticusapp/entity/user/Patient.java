@@ -34,7 +34,7 @@ public class Patient extends User {
 
     @JsonBackReference
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-    private List<Visit> visitAppointments = new ArrayList<>();
+    private List<Visit> visits = new ArrayList<>();
 
 
 
@@ -50,18 +50,18 @@ public class Patient extends User {
     }
 
 //    public List<VisitAppointment> getvisitAppointment() {
-//        return visitAppointments;
+//        return visits;
 //    }
 //
 //    public void addVisitAppointment(VisitAppointment visitAppointment) {
-//        visitAppointments.add(visitAppointment);
+//        visits.add(visitAppointment);
 //        visitAppointment.setPatient(this);
 //
 //    }
 //
 //    public void removeVisitAppointment(VisitAppointment visitAppointment) {
 //        visitAppointment.setPatient(null);
-//        this.visitAppointments.remove(visitAppointment);
+//        this.visits.remove(visitAppointment);
 //
 //    }
 
@@ -83,12 +83,12 @@ public class Patient extends User {
     }
 
 
-    public List<Visit> getVisitAppointments() {
-        return visitAppointments;
+    public List<Visit> getVisits() {
+        return visits;
     }
 
-    public void setVisitAppointments(List<Visit> visitAppointments) {
-        this.visitAppointments = visitAppointments;
+    public void setVisits(List<Visit> visits) {
+        this.visits = visits;
     }
 
     public LocalDateTime getRegisterDate() {

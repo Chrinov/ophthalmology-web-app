@@ -46,6 +46,7 @@ public class VisitController {
     @PostMapping("/visits")
     public Visit addVisit(@RequestBody Visit visit) {
         visit.setId(0);
+        System.out.println(visit);
         visitService.saveVisit(visit);
 
         return visit;

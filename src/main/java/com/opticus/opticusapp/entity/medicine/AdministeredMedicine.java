@@ -23,11 +23,11 @@ public class AdministeredMedicine {
 
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference
     private Medicine medicine;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference
     private Visit visit;
 
     public AdministeredMedicine(String dosage, String form) {
