@@ -1,7 +1,7 @@
 package com.opticus.opticusapp.entity.visit;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.opticus.opticusapp.entity.examination.Examination;
+import com.opticus.opticusapp.entity.examination.MedicalExam;
 import com.opticus.opticusapp.entity.medicine.AdministeredMedicine;
 import com.opticus.opticusapp.entity.user.Specialist;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -56,9 +56,13 @@ abstract public class Visit {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private Specialist specialist;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "visit", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-    private List<Examination> examinations = new ArrayList<>();
+  //  @JsonBackReference
+//    @OneToMany(mappedBy = "visit", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+//    private List<Examination> examinations = new ArrayList<>();
+
+    @ElementCollection
+    private List<MedicalExam> medicalExams;
+
 
 
     @JsonBackReference
@@ -74,9 +78,9 @@ abstract public class Visit {
 //        this.totalPrice = this.price + getExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
 //    }
 
-    public Double totalPrice() {
-        return this.totalPrice = this.price + getExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
-    }
+//    public Double totalPrice() {
+//        return this.totalPrice = this.price + getExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
+//    }
 
     public List<AdministeredMedicine> administeredMedicine() {
         return administeredMedicines;
@@ -110,6 +114,14 @@ abstract public class Visit {
 
     }
 
+    public List<MedicalExam> getMedicalExams() {
+        return medicalExams;
+    }
+
+    public void setMedicalExams(List<MedicalExam> medicalExams) {
+        this.medicalExams = medicalExams;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -126,13 +138,13 @@ abstract public class Visit {
         this.totalPrice = totalPrice;
     }
 
-    public List<Examination> getExaminations() {
-        return examinations;
-    }
-
-    public void setExaminations(List<Examination> examinations) {
-        this.examinations = examinations;
-    }
+//    public List<Examination> getExaminations() {
+//        return examinations;
+//    }
+//
+//    public void setExaminations(List<Examination> examinations) {
+//        this.examinations = examinations;
+//    }
 
     public Specialist getSpecialist() {
         return specialist;
