@@ -28,11 +28,11 @@ public class Patient extends User {
     @Column(name = "gender")
     private String gender;
 
-    @JsonBackReference
+    @JsonBackReference("patient-review")
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
 
-    @JsonBackReference
+    @JsonBackReference("patient-visit")
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Visit> visits = new ArrayList<>();
 

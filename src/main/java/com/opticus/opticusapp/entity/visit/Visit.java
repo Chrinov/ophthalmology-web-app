@@ -23,6 +23,7 @@ enum VisitType{
 }
 
 @Entity
+@Table(name = "visit")
 public class Visit {
 
     @Id
@@ -58,11 +59,11 @@ public class Visit {
 
 
 
-    @JsonManagedReference
+    @JsonManagedReference("patient-visit")
     @ManyToOne(cascade = {CascadeType.ALL})
     private Patient patient;
 
-    @JsonManagedReference
+    @JsonManagedReference("specialist-visit")
     @ManyToOne(cascade = {CascadeType.ALL})
     private Specialist specialist;
 

@@ -3,6 +3,7 @@ package com.opticus.opticusapp.entity.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.opticus.opticusapp.entity.clinic.Clinic;
 import com.opticus.opticusapp.entity.review.PatientSpecialistReview;
+import com.opticus.opticusapp.entity.visit.Visit;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
@@ -35,9 +36,13 @@ public class Specialist extends User {
     private String title;
 
 
-    @JsonBackReference
+    @JsonBackReference("specialist-review")
     @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL)
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
+
+    @JsonBackReference("specialist-visit")
+    @OneToMany(mappedBy = "specialist", cascade = {CascadeType.ALL})
+    private List<Visit> visits = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -67,6 +72,13 @@ public class Specialist extends User {
 
     }
 
+    public List<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(List<Visit> visits) {
+        this.visits = visits;
+    }
 
     public SpecialistType getSpecialistType() {
         return specialistType;

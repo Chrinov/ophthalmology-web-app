@@ -16,11 +16,11 @@ public class PatientSpecialistReview {
     @Column(name = "patient_specialist_review_id")
     private int id;
 
-    @JsonBackReference
+    @JsonBackReference("patient-review")
     @ManyToOne(cascade = CascadeType.ALL)
     private Patient patient;
 
-    @JsonBackReference
+    @JsonBackReference("specialist-review")
     @ManyToOne(cascade = CascadeType.ALL)
     private Specialist specialist;
 
