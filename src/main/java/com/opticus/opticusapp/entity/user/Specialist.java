@@ -3,19 +3,27 @@ package com.opticus.opticusapp.entity.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.opticus.opticusapp.entity.clinic.Clinic;
 import com.opticus.opticusapp.entity.review.PatientSpecialistReview;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+
 
 @Entity
 @Table(name = "specialist")
 public class Specialist extends User {
 
+    @Enumerated(EnumType.STRING)
+    private SpecialistType specialistType;
 
-    @ElementCollection
-    private Set<SpecialistType> specialistTypes;
+    @Enumerated(EnumType.STRING)
+    private OptometristType optometristType;
+
+
 
     @Column(name = "hire_date")
     private LocalDateTime hireDate;
@@ -53,27 +61,27 @@ public class Specialist extends User {
         this.title = title;
     }
 
-    public void addSpecialistType(SpecialistType specialistType) {
-        this.specialistTypes.add(specialistType);
-
-    }
-
-    public void removeSpecialistType(SpecialistType specialistType) {
-        this.specialistTypes.remove(specialistType);
-    }
-
-    public Set<SpecialistType> getSpecialistTypes() {
-        return specialistTypes;
-    }
-
-    public void setSpecialistTypes(Set<SpecialistType> specialistTypes) {
-        this.specialistTypes = specialistTypes;
-    }
-
     public void addClinic(Clinic clinic) {
         clinics.add(clinic);
         clinic.addSpecialist(this);
 
+    }
+
+
+    public SpecialistType getSpecialistType() {
+        return specialistType;
+    }
+
+    public void setSpecialistType(SpecialistType specialistType) {
+        this.specialistType = specialistType;
+    }
+
+    public OptometristType getOptometristType() {
+        return optometristType;
+    }
+
+    public void setOptometristType(OptometristType optometristType) {
+        this.optometristType = optometristType;
     }
 
     public void removeClinic(Clinic clinic) {

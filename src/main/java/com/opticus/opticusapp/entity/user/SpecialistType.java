@@ -1,28 +1,8 @@
 package com.opticus.opticusapp.entity.user;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
-@MappedSuperclass
-abstract public class SpecialistType {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "specialist_type_id")
-    private int id;
-
-
-    public SpecialistType() {
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
+public enum SpecialistType {
+    OPTOMETRIST, OPHTHALMOLOGIST, OPTOMETRIST_OPHTHALMOLOGIST
 }

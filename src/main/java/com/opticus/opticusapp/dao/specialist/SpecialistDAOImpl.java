@@ -23,10 +23,10 @@ public class SpecialistDAOImpl implements SpecialistDAO {
 
 
     @Override
-    public List<Specialist> getDoctors() {
+    public List<Specialist> getSpecialists() {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Specialist> theQuery = currentSession.createQuery("from Doctor order by lastName", Specialist.class);
+        Query<Specialist> theQuery = currentSession.createQuery("from Specialist order by lastName", Specialist.class);
 
         List<Specialist> specialists = theQuery.getResultList();
 
@@ -35,7 +35,7 @@ public class SpecialistDAOImpl implements SpecialistDAO {
 
 
     @Override
-    public void saveDoctor(Specialist specialist) {
+    public void saveSpecialist(Specialist specialist) {
 
         Session currentSession = entityManager.unwrap(Session.class);
 
@@ -44,7 +44,7 @@ public class SpecialistDAOImpl implements SpecialistDAO {
     }
 
     @Override
-    public Specialist getDoctor(int id) {
+    public Specialist getSpecialist(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
         Specialist specialist = currentSession.get(Specialist.class, id);
@@ -53,13 +53,13 @@ public class SpecialistDAOImpl implements SpecialistDAO {
     }
 
     @Override
-    public void deleteDoctor(int id) {
+    public void deleteSpecialist(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
         Specialist specialist = currentSession.get(Specialist.class, id);
 
-        Query theQuery = currentSession.createQuery("delete from Doctor where id=:doctorId");
-        theQuery.setParameter("doctorId", id);
+        Query theQuery = currentSession.createQuery("delete from Specialist where id=:specialistId");
+        theQuery.setParameter("specialistId", id);
 
         theQuery.executeUpdate();
 

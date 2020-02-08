@@ -10,33 +10,33 @@ import java.util.List;
 
 @Service
 
-public class DoctorServiceImpl implements DoctorService {
+public class SpecialistServiceImpl implements SpecialistService {
 
-    //inject doctor DAO
+    //inject specialist DAO
     @Autowired
     private SpecialistDAO specialistDAO;
 
     @Override
     @Transactional
-    public List<Specialist> getDoctors() {
-        return specialistDAO.getDoctors();
+    public List<Specialist> getSpecialists() {
+        return specialistDAO.getSpecialists();
     }
 
     @Override
     @Transactional
-    public void saveDoctor(Specialist specialist) {
-        specialistDAO.saveDoctor(specialist);
+    public void saveSpecialist(Specialist specialist) {
+        specialistDAO.saveSpecialist(specialist);
     }
 
     @Override
     @Transactional
-    public Specialist getDoctor(int id) {
-        return specialistDAO.getDoctor(id);
+    public Specialist getSpecialist(int id) {
+        return specialistDAO.getSpecialist(id);
     }
 
     @Override
     @Transactional
-    public void deleteDoctor(int id) {
-        specialistDAO.deleteDoctor(id);
+    public void deleteSpecialist(int id) {
+        specialistDAO.deleteSpecialist(id);
     }
 }

@@ -42,14 +42,12 @@ abstract public class Visit {
 
 
     @Column(name = "total_price")
-    private double totalPrice;
+    private Double totalPrice;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private VisitStatus status;
 
-
-    //TODO Clinic
 
     @OneToMany(mappedBy = "visit", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<VisitAppointment> visitAppointments = new ArrayList<>();
@@ -76,7 +74,7 @@ abstract public class Visit {
 //        this.totalPrice = this.price + getExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
 //    }
 
-    public double totalPrice() {
+    public Double totalPrice() {
         return this.totalPrice = this.price + getExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
     }
 
@@ -120,11 +118,11 @@ abstract public class Visit {
         this.price = price;
     }
 
-    public double getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

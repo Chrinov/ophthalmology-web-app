@@ -1,16 +1,14 @@
-package com.opticus.opticusapp.dao.specialist;
+package com.opticus.opticusapp.service;
 
 import com.opticus.opticusapp.entity.user.Specialist;
 
 import java.util.List;
 
-public interface SpecialistDAO {
+public interface SpecialistService {
 
     List<Specialist> getSpecialists();
 
     void saveSpecialist(Specialist specialist);
-
-    //void updateSpecialist(specialist specialist);
 
     Specialist getSpecialist(int id);
 
