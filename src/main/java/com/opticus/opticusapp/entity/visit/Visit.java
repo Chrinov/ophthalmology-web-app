@@ -1,8 +1,10 @@
 package com.opticus.opticusapp.entity.visit;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.opticus.opticusapp.entity.examination.MedicalExam;
 import com.opticus.opticusapp.entity.medicine.AdministeredMedicine;
+import com.opticus.opticusapp.entity.user.Patient;
 import com.opticus.opticusapp.entity.user.Specialist;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,12 +19,16 @@ enum VisitStatus {
     PLANNED, COMPLETED, CANCELLED
 }
 
+enum VisitType{
+    OPTOMETRICAL, OPHTHALMOLOGICAL
+}
+
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-abstract public class Visit {
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Visit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "visit_id")
     private int id;
 
@@ -48,11 +54,17 @@ abstract public class Visit {
     @Column(name = "status")
     private VisitStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "visit_type")
+    private VisitType visitType;
 
-    @OneToMany(mappedBy = "visit", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-    private List<VisitAppointment> visitAppointments = new ArrayList<>();
 
-    @JsonBackReference
+
+    @JsonManagedReference
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    private Patient patient;
+
+    @JsonManagedReference
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private Specialist specialist;
 
@@ -60,7 +72,12 @@ abstract public class Visit {
 //    @OneToMany(mappedBy = "visit", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
 //    private List<Examination> examinations = new ArrayList<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "medical_examinations", joinColumns = @JoinColumn(name = "visit_id"))
+    @AttributeOverrides({
+            @AttributeOverride(name = "name", column = @Column(name = "examination_name")),
+            @AttributeOverride(name = "price", column = @Column(name = "examination_price"))
+    })
     private List<MedicalExam> medicalExams;
 
 
@@ -70,10 +87,32 @@ abstract public class Visit {
     private List<AdministeredMedicine> administeredMedicines = new ArrayList<>();
 
 
+    public Visit(LocalDateTime date, LocalTime time, String description, double price, VisitStatus status, VisitType visitType, Specialist specialist) {
+        this.date = date;
+        this.time = time;
+        this.description = description;
+        this.price = price;
+        this.status = status;
+        this.visitType = visitType;
+        this.specialist = specialist;
+    }
+
     public Visit() {
     }
 
-//    @PostUpdate
+    public Visit(LocalDateTime date, LocalTime time, String description, double price, Double totalPrice, VisitStatus status, VisitType visitType, Patient patient, Specialist specialist) {
+        this.date = date;
+        this.time = time;
+        this.description = description;
+        this.price = price;
+        this.totalPrice = totalPrice;
+        this.status = status;
+        this.visitType = visitType;
+        this.patient = patient;
+        this.specialist = specialist;
+    }
+
+    //    @PostUpdate
 //    private void postLoad() {
 //        this.totalPrice = this.price + getExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
 //    }
@@ -98,20 +137,38 @@ abstract public class Visit {
 
     }
 
-    public List<VisitAppointment> getvisitAppointment() {
-        return visitAppointments;
+//    public List<VisitAppointment> getvisitAppointment() {
+//        return visitAppointments;
+//    }
+//
+//    public void addVisitAppointment(VisitAppointment visitAppointment) {
+//        visitAppointments.add(visitAppointment);
+//        visitAppointment.setVisit(this);
+//
+//    }
+//
+//    public void removeVisitAppointment(VisitAppointment visitAppointment) {
+//        visitAppointment.setVisit(null);
+//        this.visitAppointments.remove(visitAppointment);
+//
+//    }
+
+
+//    public VisitAppointment getVisitAppointments() {
+//        return visitAppointments;
+//    }
+//
+//    public void setVisitAppointments(VisitAppointment visitAppointments) {
+//        this.visitAppointments = visitAppointments;
+//    }
+
+
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void addVisitAppointment(VisitAppointment visitAppointment) {
-        visitAppointments.add(visitAppointment);
-        visitAppointment.setVisit(this);
-
-    }
-
-    public void removeVisitAppointment(VisitAppointment visitAppointment) {
-        visitAppointment.setVisit(null);
-        this.visitAppointments.remove(visitAppointment);
-
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public List<MedicalExam> getMedicalExams() {
@@ -128,6 +185,14 @@ abstract public class Visit {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public VisitType getVisitType() {
+        return visitType;
+    }
+
+    public void setVisitType(VisitType visitType) {
+        this.visitType = visitType;
     }
 
     public Double getTotalPrice() {

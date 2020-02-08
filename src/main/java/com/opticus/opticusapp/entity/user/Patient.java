@@ -2,7 +2,7 @@ package com.opticus.opticusapp.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.opticus.opticusapp.entity.review.PatientSpecialistReview;
-import com.opticus.opticusapp.entity.visit.VisitAppointment;
+import com.opticus.opticusapp.entity.visit.Visit;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -34,7 +34,7 @@ public class Patient extends User {
 
     @JsonBackReference
     @OneToMany(mappedBy = "patient", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-    private List<VisitAppointment> visitAppointments = new ArrayList<>();
+    private List<Visit> visitAppointments = new ArrayList<>();
 
 
 
@@ -49,21 +49,21 @@ public class Patient extends User {
         this.gender = gender;
     }
 
-    public List<VisitAppointment> getvisitAppointment() {
-        return visitAppointments;
-    }
-
-    public void addVisitAppointment(VisitAppointment visitAppointment) {
-        visitAppointments.add(visitAppointment);
-        visitAppointment.setPatient(this);
-
-    }
-
-    public void removeVisitAppointment(VisitAppointment visitAppointment) {
-        visitAppointment.setPatient(null);
-        this.visitAppointments.remove(visitAppointment);
-
-    }
+//    public List<VisitAppointment> getvisitAppointment() {
+//        return visitAppointments;
+//    }
+//
+//    public void addVisitAppointment(VisitAppointment visitAppointment) {
+//        visitAppointments.add(visitAppointment);
+//        visitAppointment.setPatient(this);
+//
+//    }
+//
+//    public void removeVisitAppointment(VisitAppointment visitAppointment) {
+//        visitAppointment.setPatient(null);
+//        this.visitAppointments.remove(visitAppointment);
+//
+//    }
 
 
     public List<PatientSpecialistReview> getPatientSpecialistReviews() {
@@ -80,6 +80,15 @@ public class Patient extends User {
         patientSpecialistReview.setPatient(null);
         this.patientSpecialistReviews.remove(patientSpecialistReview);
 
+    }
+
+
+    public List<Visit> getVisitAppointments() {
+        return visitAppointments;
+    }
+
+    public void setVisitAppointments(List<Visit> visitAppointments) {
+        this.visitAppointments = visitAppointments;
     }
 
     public LocalDateTime getRegisterDate() {

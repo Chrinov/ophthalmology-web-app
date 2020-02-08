@@ -1,6 +1,7 @@
 package com.opticus.opticusapp.entity.medicine;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.opticus.opticusapp.entity.visit.Visit;
 
 import javax.persistence.*;
@@ -22,11 +23,11 @@ public class AdministeredMedicine {
 
 
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     private Medicine medicine;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     private Visit visit;
 
     public AdministeredMedicine(String dosage, String form) {

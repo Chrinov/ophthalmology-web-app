@@ -4,6 +4,7 @@ import com.opticus.opticusapp.entity.visit.Visit;
 import com.opticus.opticusapp.helpers.VisitNotFoundException;
 import com.opticus.opticusapp.service.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +43,6 @@ public class VisitController {
     }
 
 
-    
     @PostMapping("/visits")
     public Visit addVisit(@RequestBody Visit visit) {
         visit.setId(0);
