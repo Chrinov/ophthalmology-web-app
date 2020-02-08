@@ -1,6 +1,7 @@
 package com.opticus.opticusapp.entity.medicine;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.opticus.opticusapp.entity.review.PatientSpecialistReview;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class Medicine {
     private String name;
 
 
-    @JsonBackReference
+    @JsonManagedReference("medicine-administered")
     @OneToMany(mappedBy = "medicine", cascade = CascadeType.ALL)
     private List<AdministeredMedicine> administeredMedicines = new ArrayList<>();
 

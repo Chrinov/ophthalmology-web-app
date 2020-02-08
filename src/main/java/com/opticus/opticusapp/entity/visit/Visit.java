@@ -27,7 +27,7 @@ enum VisitType{
 public class Visit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "visit_id")
     private int id;
 
@@ -59,11 +59,11 @@ public class Visit {
 
 
 
-    @JsonManagedReference("patient-visit")
+    @JsonBackReference("patient-visit")
     @ManyToOne(cascade = {CascadeType.ALL})
     private Patient patient;
 
-    @JsonManagedReference("specialist-visit")
+    @JsonBackReference("specialist-visit")
     @ManyToOne(cascade = {CascadeType.ALL})
     private Specialist specialist;
 
@@ -84,7 +84,7 @@ public class Visit {
 
  //   @JsonBackReference
  //   @JsonIgnore
-    @JsonManagedReference
+    @JsonManagedReference("medicine-visit")
     @OneToMany(mappedBy = "visit", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<AdministeredMedicine> administeredMedicines = new ArrayList<>();
 

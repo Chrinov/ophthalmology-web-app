@@ -25,7 +25,6 @@ public class VisitServiceImpl implements VisitService {
     @Override
     @Transactional
     public void saveVisit(Visit visit) {
-
         visitDAO.saveVisit(visit);
     }
 
