@@ -2,6 +2,7 @@ package com.opticus.opticusapp.controller;
 
 import com.opticus.opticusapp.entity.user.Patient;
 import com.opticus.opticusapp.entity.visit.Visit;
+import com.opticus.opticusapp.entity.visit.VisitStatus;
 import com.opticus.opticusapp.helpers.VisitNotFoundException;
 import com.opticus.opticusapp.service.patient.PatientService;
 import com.opticus.opticusapp.service.visit.VisitService;
@@ -38,9 +39,16 @@ public class VisitController {
     }
 
     
-    @PutMapping("/visits/}")
-    public Visit saveVisit(@RequestBody Visit visit) {
-        visitService.saveVisit(visit);
+    @PutMapping("/visits/{visitId}")
+    public Visit saveVisit(@PathVariable int visitId, @RequestBody Visit visit) {
+        Visit tmpVisit = visitService.getVisit(visitId);
+        checkIfVisitExists(tmpVisit);
+
+        VisitStatus status = visit.getStatus();
+
+        tmpVisit.setStatus(status);
+
+        visitService.saveVisit(tmpVisit);
 
         return visit;
     }

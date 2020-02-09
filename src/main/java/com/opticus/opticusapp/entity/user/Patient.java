@@ -1,6 +1,7 @@
 package com.opticus.opticusapp.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.opticus.opticusapp.entity.review.PatientSpecialistReview;
 import com.opticus.opticusapp.entity.visit.Visit;
@@ -29,8 +30,9 @@ public class Patient extends User {
     @Column(name = "gender")
     private String gender;
 
-    @JsonManagedReference("patient-review")
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+   // @JsonManagedReference("patient-review")
+   @JsonIgnore
+   @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
 
 

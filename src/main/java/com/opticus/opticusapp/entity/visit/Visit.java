@@ -1,6 +1,9 @@
 package com.opticus.opticusapp.entity.visit;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.opticus.opticusapp.entity.clinic.Clinic;
 import com.opticus.opticusapp.entity.examination.MedicalExam;
 import com.opticus.opticusapp.entity.medicine.AdministeredMedicine;
@@ -15,13 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-enum VisitStatus {
-    PLANNED, COMPLETED, CANCELLED
-}
-
 enum VisitType {
     OPTOMETRICAL, OPHTHALMOLOGICAL
+
 }
+
+
 
 @Entity
 @Table(name = "visit")
@@ -59,6 +61,9 @@ public class Visit {
     private VisitType visitType;
 
 
+
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(cascade = {CascadeType.ALL})
     private Clinic clinic;
 

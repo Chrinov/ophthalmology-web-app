@@ -1,6 +1,7 @@
 package com.opticus.opticusapp.entity.review;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.opticus.opticusapp.entity.user.Patient;
 import org.hibernate.validator.constraints.Range;
 import com.opticus.opticusapp.entity.user.Specialist;
@@ -16,11 +17,14 @@ public class PatientSpecialistReview {
     @Column(name = "patient_specialist_review_id")
     private int id;
 
-    @JsonBackReference("patient-review")
+
+//    @JsonBackReference("patient-review")
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private Patient patient;
 
-    @JsonBackReference("specialist-review")
+//    @JsonBackReference("specialist-review")
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private Specialist specialist;
 
