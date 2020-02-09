@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3000/api/visits"}, maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:3000"}, maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class VisitController {
@@ -38,7 +38,7 @@ public class VisitController {
     }
 
     
-    @PutMapping("/visits")
+    @PutMapping("/visits/}")
     public Visit saveVisit(@RequestBody Visit visit) {
         visitService.saveVisit(visit);
 

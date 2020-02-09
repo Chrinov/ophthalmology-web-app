@@ -1,12 +1,12 @@
 package com.opticus.opticusapp.entity.clinic;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import com.opticus.opticusapp.entity.review.PatientSpecialistReview;
 import com.opticus.opticusapp.entity.user.Specialist;
+import com.opticus.opticusapp.entity.visit.Visit;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,10 +25,14 @@ public class Clinic {
   private String address;
   
   @ManyToMany(mappedBy = "clinics")
-  @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  @JsonIdentityReference(alwaysAsId = true)
+//  @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//  @JsonIdentityReference(alwaysAsId = true)
   private Set<Specialist> specialists = new HashSet<>();
 
+//  @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//  @JsonIdentityReference(alwaysAsId = true)
+  @OneToMany(mappedBy = "clinic", cascade = {CascadeType.ALL})
+  private List<Visit> visits = new ArrayList<>();
 
   public Clinic(String address) {
     this.address = address;

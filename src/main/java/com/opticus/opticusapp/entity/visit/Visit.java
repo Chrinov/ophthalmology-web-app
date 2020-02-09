@@ -1,6 +1,7 @@
 package com.opticus.opticusapp.entity.visit;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.opticus.opticusapp.entity.clinic.Clinic;
 import com.opticus.opticusapp.entity.examination.MedicalExam;
 import com.opticus.opticusapp.entity.medicine.AdministeredMedicine;
 import com.opticus.opticusapp.entity.user.Patient;
@@ -58,6 +59,9 @@ public class Visit {
     private VisitType visitType;
 
 
+    @ManyToOne(cascade = {CascadeType.ALL})
+    private Clinic clinic;
+
     //   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     // @JsonIdentityReference(alwaysAsId = true)
     //  @JsonBackReference("patient-visit")
@@ -94,7 +98,7 @@ public class Visit {
     public Visit() {
     }
 
-    public Visit(LocalDateTime date, LocalTime time, String description, double price, Double totalPrice, VisitStatus status, VisitType visitType, Patient patient, Specialist specialist) {
+    public Visit(LocalDateTime date, LocalTime time, String description, double price, Double totalPrice, VisitStatus status, VisitType visitType, Clinic clinic, Patient patient, Specialist specialist) {
         this.date = date;
         this.time = time;
         this.description = description;
@@ -102,9 +106,11 @@ public class Visit {
         this.totalPrice = totalPrice;
         this.status = status;
         this.visitType = visitType;
+        this.clinic = clinic;
         this.patient = patient;
         this.specialist = specialist;
     }
+
 
     //    @PostUpdate
 //    private void postLoad() {
@@ -156,6 +162,14 @@ public class Visit {
 //        this.visitAppointments = visitAppointments;
 //    }
 
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
 
     public Patient getPatient() {
         return patient;

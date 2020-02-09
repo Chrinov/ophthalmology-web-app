@@ -46,7 +46,6 @@ public class Specialist extends User {
     @OneToMany(mappedBy = "specialist", cascade = {CascadeType.ALL})
     private List<Visit> visits = new ArrayList<>();
 
-    @JsonBackReference
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
         name= "specialist_clinic",
