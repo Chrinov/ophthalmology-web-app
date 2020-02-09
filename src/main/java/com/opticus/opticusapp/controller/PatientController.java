@@ -2,13 +2,13 @@ package com.opticus.opticusapp.controller;
 
 import com.opticus.opticusapp.entity.user.Patient;
 import com.opticus.opticusapp.helpers.PatientNotFoundException;
-import com.opticus.opticusapp.service.PatientService;
+import com.opticus.opticusapp.service.patient.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5000", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3000/api/patients"}, maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class PatientController {

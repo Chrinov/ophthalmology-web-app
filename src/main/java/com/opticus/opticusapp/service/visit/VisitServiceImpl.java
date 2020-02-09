@@ -1,4 +1,4 @@
-package com.opticus.opticusapp.service;
+package com.opticus.opticusapp.service.visit;
 
 import com.opticus.opticusapp.dao.visit.VisitDAO;
 import com.opticus.opticusapp.entity.visit.Visit;

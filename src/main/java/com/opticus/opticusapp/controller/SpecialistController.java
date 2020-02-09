@@ -3,13 +3,13 @@ package com.opticus.opticusapp.controller;
 
 import com.opticus.opticusapp.entity.user.Specialist;
 import com.opticus.opticusapp.helpers.SpecialistNotFoundException;
-import com.opticus.opticusapp.service.SpecialistService;
+import com.opticus.opticusapp.service.specialist.SpecialistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5000", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3000/api/specialists"}, maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class SpecialistController {

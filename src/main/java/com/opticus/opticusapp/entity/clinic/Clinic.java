@@ -1,5 +1,8 @@
 package com.opticus.opticusapp.entity.clinic;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.opticus.opticusapp.entity.review.PatientSpecialistReview;
 import com.opticus.opticusapp.entity.user.Specialist;
 
@@ -22,6 +25,8 @@ public class Clinic {
   private String address;
   
   @ManyToMany(mappedBy = "clinics")
+  @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+  @JsonIdentityReference(alwaysAsId = true)
   private Set<Specialist> specialists = new HashSet<>();
 
 

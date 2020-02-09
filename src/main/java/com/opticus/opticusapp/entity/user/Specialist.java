@@ -42,9 +42,11 @@ public class Specialist extends User {
     private List<PatientSpecialistReview> patientSpecialistReviews = new ArrayList<>();
 
    // @JsonManagedReference("specialist-visit")
+    @JsonBackReference
     @OneToMany(mappedBy = "specialist", cascade = {CascadeType.ALL})
     private List<Visit> visits = new ArrayList<>();
 
+    @JsonBackReference
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
         name= "specialist_clinic",

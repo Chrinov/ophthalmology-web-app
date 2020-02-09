@@ -1,6 +1,6 @@
 package com.opticus.opticusapp.entity.visit;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.opticus.opticusapp.entity.examination.MedicalExam;
 import com.opticus.opticusapp.entity.medicine.AdministeredMedicine;
 import com.opticus.opticusapp.entity.user.Patient;
@@ -18,7 +18,7 @@ enum VisitStatus {
     PLANNED, COMPLETED, CANCELLED
 }
 
-enum VisitType{
+enum VisitType {
     OPTOMETRICAL, OPHTHALMOLOGICAL
 }
 
@@ -58,24 +58,23 @@ public class Visit {
     private VisitType visitType;
 
 
-
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-    @JsonIdentityReference(alwaysAsId = true)
-  //  @JsonBackReference("patient-visit")
+    //   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    // @JsonIdentityReference(alwaysAsId = true)
+    //  @JsonBackReference("patient-visit")
     @ManyToOne(cascade = {CascadeType.ALL})
     private Patient patient;
 
-   // @JsonBackReference("specialist-visit")
-   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-   @JsonIdentityReference(alwaysAsId = true)
+    // @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    // @JsonIdentityReference(alwaysAsId = true)
+    //@JsonBackReference("specialist-visit")
     @ManyToOne(cascade = {CascadeType.ALL})
     private Specialist specialist;
 
-  //  @JsonBackReference
+    //  @JsonBackReference
 //    @OneToMany(mappedBy = "visit", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
 //    private List<Examination> examinations = new ArrayList<>();
 
-  //  @JsonBackReference
+    //  @JsonBackReference
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "medical_examinations", joinColumns = @JoinColumn(name = "visit_id"))
     @AttributeOverrides({
@@ -85,9 +84,8 @@ public class Visit {
     private List<MedicalExam> medicalExams;
 
 
-
- //   @JsonBackReference
- //   @JsonIgnore
+    //   @JsonBackReference
+    //   @JsonIgnore
     @JsonManagedReference("medicine-visit")
     @OneToMany(mappedBy = "visit", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<AdministeredMedicine> administeredMedicines = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.opticus.opticusapp.service;
+package com.opticus.opticusapp.service.specialist;
 
 import com.opticus.opticusapp.dao.specialist.SpecialistDAO;
 import com.opticus.opticusapp.entity.user.Specialist;
