@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class MedicalExam {
+public class MedicalExamination {
 
     @Column(name = "medical_exam_name")
     private String name;
@@ -12,11 +12,19 @@ public class MedicalExam {
     @Column(name = "price")
     private double price;
 
-    public MedicalExam(String name) {
+    public MedicalExamination(String name) {
         this.name = name;
     }
 
-    public MedicalExam() {
+    public MedicalExamination() {
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getName() {

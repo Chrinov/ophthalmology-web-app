@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.opticus.opticusapp.entity.clinic.Clinic;
-import com.opticus.opticusapp.entity.examination.MedicalExam;
+import com.opticus.opticusapp.entity.examination.MedicalExamination;
 import com.opticus.opticusapp.entity.medicine.AdministeredMedicine;
 import com.opticus.opticusapp.entity.user.Patient;
 import com.opticus.opticusapp.entity.user.Specialist;
@@ -46,7 +46,7 @@ public class Visit {
 
 
     @Column(name = "price")
-    private double price;
+    private double price = 50;
 
 
     @Column(name = "total_price")
@@ -90,7 +90,7 @@ public class Visit {
             @AttributeOverride(name = "name", column = @Column(name = "examination_name")),
             @AttributeOverride(name = "price", column = @Column(name = "examination_price"))
     })
-    private List<MedicalExam> medicalExams;
+    private List<MedicalExamination> medicalExaminations;
 
 
     //   @JsonBackReference
@@ -184,12 +184,12 @@ public class Visit {
         this.patient = patient;
     }
 
-    public List<MedicalExam> getMedicalExams() {
-        return medicalExams;
+    public List<MedicalExamination> getMedicalExaminations() {
+        return medicalExaminations;
     }
 
-    public void setMedicalExams(List<MedicalExam> medicalExams) {
-        this.medicalExams = medicalExams;
+    public void setMedicalExaminations(List<MedicalExamination> medicalExaminations) {
+        this.medicalExaminations = medicalExaminations;
     }
 
     public double getPrice() {

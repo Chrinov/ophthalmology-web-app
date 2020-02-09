@@ -1,6 +1,7 @@
 package com.opticus.opticusapp.controller;
 
 import com.opticus.opticusapp.entity.clinic.Clinic;
+import com.opticus.opticusapp.entity.examination.MedicalExamination;
 import com.opticus.opticusapp.entity.user.Patient;
 import com.opticus.opticusapp.entity.user.Specialist;
 import com.opticus.opticusapp.entity.visit.Visit;
@@ -80,6 +81,11 @@ public class VisitController {
 
         Clinic clinic = clinicService.getClinic(visit.getClinic().getId());
         visit.setClinic(clinic);
+
+        double totalPrice = visit.getPrice() + visit.getMedicalExaminations().stream().mapToDouble(e -> e.getPrice()).sum();
+
+        visit.setTotalPrice(totalPrice);
+
         visitService.saveVisit(visit);
 
         return visit;
