@@ -31,4 +31,13 @@ public class ClinicDAOImpl implements ClinicDAO {
 
         return clinics;
     }
+
+    @Override
+    public Clinic getClinic(int id) {
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Clinic clinic = currentSession.get(Clinic.class, id);
+
+        return clinic;
+    }
 }

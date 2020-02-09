@@ -38,11 +38,11 @@ public class PatientDAOImpl implements PatientDAO {
 
 
     @Override
-    public void savePatient(Patient note) {
+    public void savePatient(Patient patient) {
 
         Session currentSession = entityManager.unwrap(Session.class);
 
-        currentSession.saveOrUpdate(note);
+        currentSession.saveOrUpdate(patient);
 
     }
 
@@ -50,9 +50,9 @@ public class PatientDAOImpl implements PatientDAO {
     public Patient getPatient(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Patient note = currentSession.get(Patient.class, id);
+        Patient patient = currentSession.get(Patient.class, id);
 
-        return note;
+        return patient;
     }
 
     @Override

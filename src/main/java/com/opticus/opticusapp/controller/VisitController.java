@@ -1,10 +1,14 @@
 package com.opticus.opticusapp.controller;
 
+import com.opticus.opticusapp.entity.clinic.Clinic;
 import com.opticus.opticusapp.entity.user.Patient;
+import com.opticus.opticusapp.entity.user.Specialist;
 import com.opticus.opticusapp.entity.visit.Visit;
 import com.opticus.opticusapp.entity.visit.VisitStatus;
 import com.opticus.opticusapp.helpers.VisitNotFoundException;
+import com.opticus.opticusapp.service.clinic.ClinicService;
 import com.opticus.opticusapp.service.patient.PatientService;
+import com.opticus.opticusapp.service.specialist.SpecialistService;
 import com.opticus.opticusapp.service.visit.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +25,13 @@ public class VisitController {
 
     @Autowired
     private PatientService patientService;
-    
+
+    @Autowired
+    private SpecialistService specialistService;
+
+    @Autowired
+    private ClinicService clinicService;
+
     @GetMapping("/visits")
     public List<Visit> getVisits() {
         return visitService.getVisits();
@@ -56,12 +66,20 @@ public class VisitController {
 
     @PostMapping("/visits")
     public Visit addVisit(@RequestBody Visit visit) {
-        visit.setId(0);
+       // visit.setId(0);
+
+
+     //   System.out.println(patientService.getPatient(visit.getPatient().getId()));
 
         Patient patient = patientService.getPatient(visit.getPatient().getId());
         visit.setPatient(patient);
-        visit.setSpecialist(null);
 
+        Specialist specialist = specialistService.getSpecialist(visit.getSpecialist().getId());
+        visit.setSpecialist(specialist);
+
+
+        Clinic clinic = clinicService.getClinic(visit.getClinic().getId());
+        visit.setClinic(clinic);
         visitService.saveVisit(visit);
 
         return visit;

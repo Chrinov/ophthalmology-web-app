@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ClinicDAO {
     List<Clinic> getClinics();
+
+    Clinic getClinic(int id);
 }

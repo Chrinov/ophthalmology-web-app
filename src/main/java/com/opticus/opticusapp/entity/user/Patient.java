@@ -30,6 +30,9 @@ public class Patient extends User {
     @Column(name = "gender")
     private String gender;
 
+    @Column(name = "pesel")
+    private String pesel;
+
    // @JsonManagedReference("patient-review")
    @JsonIgnore
    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
@@ -46,12 +49,13 @@ public class Patient extends User {
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName, LocalDateTime birthdate, String email, boolean signUpConfirmed, LocalDateTime registerDate, List<String> phoneNumber, LocalDateTime birthDate, String gender) {
+    public Patient(String firstName, String lastName, LocalDateTime birthdate, String email, boolean signUpConfirmed, LocalDateTime registerDate, List<String> phoneNumber, LocalDateTime birthDate, String gender, String pesel) {
         super(firstName, lastName, birthdate, email, signUpConfirmed);
         this.registerDate = registerDate;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.gender = gender;
+        this.pesel = pesel;
     }
 
 //    public List<VisitAppointment> getvisitAppointment() {
@@ -87,6 +91,14 @@ public class Patient extends User {
 
     }
 
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
+    }
 
     public List<Visit> getVisits() {
         return visits;

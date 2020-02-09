@@ -21,4 +21,9 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicDAO.getClinics();
     }
 
+    @Override
+    public Clinic getClinic(int id) {
+        return clinicDAO.getClinic(id);
+    }
+
 }

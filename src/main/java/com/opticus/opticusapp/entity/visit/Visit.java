@@ -30,7 +30,7 @@ enum VisitType {
 public class Visit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "visit_id")
     private int id;
 
